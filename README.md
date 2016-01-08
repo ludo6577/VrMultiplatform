@@ -10,13 +10,13 @@ Only the **GearVR** is currently supported but all other headset that Unity supp
 
 ## How to use it
 
-Here are the different step to reproduce this example project
+Here are the different steps to reproduce this sample project
 
 
 #### 1) Importing Cardboard SDK
 
 
-After importing the **Cardboard SDK** you can see that it create a folder in **Assets/Plugins/Android**:
+After importing the **Cardboard SDK** you can see that it creates a folder in **Assets/Plugins/Android**:
 
 ![Import Cardboard](/Images/ImportCardboard.png?raw=true "Import Cardboard")
 
@@ -25,7 +25,7 @@ Copy and rename this folder in **Assets/Plateforms/AndroidCardboard** (or the di
 
 ![Save Cardboard library](/Images/SaveCardboardLib.png?raw=true "Save Cardboard library")
 
-Do the same steps for the GearVR: Get the [Oculus Signature File](https://developer.oculus.com/osig/) then place it in the folder **Assets/Plateforms/AndroidGearVR/assets/**.
+Do the same steps for the GearVR: Get the [Oculus Signature File](https://developer.oculus.com/osig/) then place it into the folder **Assets/Plateforms/AndroidGearVR/assets/**.
 
 The two folders we have just created will automatically replace the default **Android Plugins** during the compilation (in **Assets/Plugins/Android**).
 
@@ -59,7 +59,7 @@ For more informations see commit: [Added precompilation directive in Cardboard S
 
 #### 3) Creating the build script
 
-Firsts lines contains your project name, bundle identifier, output folder and the output filename for all the plateforms. Theses informations are going to be used during the compilation:
+Firsts lines contains your project name, bundle identifier, output folder and the output filename for all the platforms. Theses informations are going to be used during the compilation:
 
 ```C#
 private static string bundleIdentifier = "com.MyCompany.MyProductName";
@@ -191,9 +191,9 @@ Finally the function build get all the scenes from the **Build Settings** window
 }
 ```
 
-The script [BuildScript.cs](/Assets/BuildScript.cs) have comment in it and is (i think) easy to understand.
+The script [BuildScript.cs](/Assets/BuildScript.cs) has comments in it and is (i guess) easy to understand.
 
-That's all ! Enjoy you Virtual Reality builds on all Plateforms ! feel free to make pull request for new plateforms! :)
+That's all ! Enjoy you Virtual Reality builds on all Platforms ! feel free to make pull request for new platforms! :)
 
 Thanks !
 
