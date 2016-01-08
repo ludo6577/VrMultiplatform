@@ -77,8 +77,8 @@ The next three lines contains path to destination folder (android plugins) and f
  private static string androidFolderGearVR = Application.dataPath + "/Plateforms/AndroidGearVR/";
 ```
 
-Uncomment next three line if you want to save your keystore userName and Password in this file (not recommended).
-If you don't you will have to enter your credential in the **Player Settings** panel the first time you compile your project.
+Uncomment next three line if you want to save your **Keystore Path**, **UserName** and **Password** in this file (not recommended).
+If you don't you will have to enter your credential in the **Player Settings -> Publishing Settings** panel the first time you compile your project.
 
 ```C#
 //private static string keystorePath;
@@ -86,7 +86,7 @@ If you don't you will have to enter your credential in the **Player Settings** p
 //private static string password;
 ```
 
-Next variable is used if you make multiple release the same day. The play store don't allow multiple release with same id. (Note: the version number is generated from the date and this ``buildNumber`` with the following format: YYYYMMDDB):
+Next variable is used if you make multiple release the same day. The play store don't allow multiple release with same id. (Note: the version number is generated from the date and this ``buildNumber`` with the following format: **YYYYMMDDB**):
 
 ```C#
 private static int buildNumber = 0;
@@ -191,7 +191,7 @@ Finally the function build get all the scenes from the **Build Settings** window
 }
 ```
 
-The script [BuildScript.cs](/Assets/BuildScript.cs) have a lot of comment in it and is (i think) easy to understand.
+The script [BuildScript.cs](/Assets/BuildScript.cs) have comment in it and is (i think) easy to understand.
 
 That's all ! Enjoy you Virtual Reality builds on all Plateforms ! feel free to make pull request for new plateforms! :)
 
