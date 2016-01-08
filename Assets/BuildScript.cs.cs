@@ -17,6 +17,7 @@ using System.Linq;
 public class BuildScript : MonoBehaviour {
 
 	// Generated file info
+	private static string bundleIdentifier = "com.MyCompany.MyProductName";
 	private static string productName = "TestScene";
 	private static string outputFolder = "bin/";
 	private static string outputFilenameAndroidCardboard = outputFolder + BuildScript.productName + "Cardboard.apk";
@@ -28,14 +29,13 @@ public class BuildScript : MonoBehaviour {
 	private static string androidFolderCardboard = Application.dataPath + "/Plugins/AndroidCardboard/";
 	private static string androidFolderGearVR = Application.dataPath + "/Plugins/AndroidGearVR/";
 
-	// Keystore path, username and password (set it in Player Settings)
-	private static string keystorePath;
-	private static string username;
-	private static string password;
+	// Keystore path, username and password (set it in Player Settings or here if you want to give in raw text)
+	//private static string keystorePath;
+	//private static string username;
+	//private static string password;
 
-	// Generated version and build number
-	private static string versionNumber;
-	private static string buildNumber;
+	// If you release multiple time on store in one day increment this (Version number as: YYYYMMDDB)
+	private static int buildNumber = 0;
 
 
 	[MenuItem("Build/Cardboard")]
@@ -43,6 +43,7 @@ public class BuildScript : MonoBehaviour {
 	{
 		Init ();
 		SwapAndroidPluginFolder (androidFolderCardboard);
+		PlayerSettings.virtualRealitySupported = false;
 		PlayerSettings.SetScriptingDefineSymbolsForGroup (BuildTargetGroup.Android, "");
 		Build(BuildTarget.Android, outputFilenameAndroidCardboard);
 	}
@@ -52,7 +53,8 @@ public class BuildScript : MonoBehaviour {
 	{
 		Init ();
 		SwapAndroidPluginFolder (androidFolderGearVR);
-		PlayerSettings.SetScriptingDefineSymbolsForGroup (BuildTargetGroup.Android, "VR_SUPPORTED");	// Add a precompilation sympol to disable the cardboard SDK
+		PlayerSettings.virtualRealitySupported = true;
+		PlayerSettings.SetScriptingDefineSymbolsForGroup (BuildTargetGroup.Android, "NATIVE_VR_SUPPORTED");	// Add a precompilation sympol to disable the cardboard SDK
 		Build(BuildTarget.Android, outputFilenameAndroidGearVR);
 	}
 	
@@ -61,20 +63,17 @@ public class BuildScript : MonoBehaviour {
 	
 	private static void Init()
 	{
-		versionNumber = Environment.GetEnvironmentVariable("VERSION_NUMBER");
-		if (string.IsNullOrEmpty(versionNumber))
-			versionNumber = "1.0.0.0";
-		
-		buildNumber = Environment.GetEnvironmentVariable("BUILD_NUMBER");
-		if (string.IsNullOrEmpty(buildNumber))
-			buildNumber = "1";
+		var now = DateTime.Now;
+		var versionNumber = now.Year.ToString() + now.Month.ToString() + now.Day.ToString() + buildNumber.ToString(); //Version number: YYYYMMDDB
 		
 		PlayerSettings.productName = productName;
+		PlayerSettings.bundleIdentifier = bundleIdentifier;
 		PlayerSettings.bundleVersion = versionNumber;
+		PlayerSettings.Android.bundleVersionCode = int.Parse(versionNumber);
 
-		keystorePath = PlayerSettings.Android.keystoreName;
-		username = PlayerSettings.Android.keyaliasName;
-		password = PlayerSettings.Android.keyaliasPass;
+		//PlayerSettings.Android.keystoreName = keystorePath;
+		//PlayerSettings.Android.keyaliasName = username;
+		//PlayerSettings.Android.keyaliasPass = password;
 	}
 
 
