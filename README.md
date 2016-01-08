@@ -25,7 +25,7 @@ Copy and rename this folder in **Assets/Plateforms/AndroidCardboard** (or the di
 
 ![Save Cardboard library](/Images/SaveCardboardLib.png?raw=true "Save Cardboard library")
 
-Do the same steps for the GearVR: Get the ![Oculus Signature File](https://developer.oculus.com/osig/) then place it in the folder **Assets/Plateforms/AndroidGearVR/assets/**.
+Do the same steps for the GearVR: Get the [Oculus Signature File](https://developer.oculus.com/osig/) then place it in the folder **Assets/Plateforms/AndroidGearVR/assets/**.
 
 The two folders we have just created will automatically replace the default Android Plugins during the compilation (**Assets/Plugins/Android**).
 
