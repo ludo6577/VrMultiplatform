@@ -31,10 +31,12 @@ Copy and rename this folder in **Assets -> Plateforms -> AndroidCardboard** (or 
 
 We now need to add **Preprocessor Directives** to ignore **SDK functions** when the project compilation is set to **Virtual Reality Mode in Unity** :
 
-     #if NATIVE_VR_SUPPORTED
-		 return;
-	 #endif
-	 
+```C#
+#if NATIVE_VR_SUPPORTED
+    return;
+#endif
+```
+
 This code is added in:
 * File: **Cardboard.cs**
    * Property accessor: ``SDK``
