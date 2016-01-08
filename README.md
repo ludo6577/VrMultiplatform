@@ -16,18 +16,21 @@ Here are the different step to reproduce this example project
 #### 1) Importing Cardboard SDK
 
 
-After importing the **Cardboard SDK** you can see that it create a folder in **Assets -> Plugins -> Android**:
+After importing the **Cardboard SDK** you can see that it create a folder in **Assets/Plugins/Android**:
 
 ![Import Cardboard](/Images/ImportCardboard.png?raw=true "Import Cardboard")
 
 
-Copy and rename this folder in **Assets -> Plateforms -> AndroidCardboard** (or the directory of your choice):
+Copy and rename this folder in **Assets/Plateforms/AndroidCardboard** (or the directory of your choice):
 
 ![Save Cardboard library](/Images/SaveCardboardLib.png?raw=true "Save Cardboard library")
 
+Do the same steps for the GearVR: Get the ![Oculus Signature File](https://developer.oculus.com/osig/) then place it in the folder **Assets/Plateforms/AndroidGearVR/assets/**.
+
+The two folders we have just created will automatically replace the default Android Plugins during the compilation (**Assets/Plugins/Android**).
 
 
-#### 2) Modifying Cardboard SDK Scripts to allow deactivation
+#### 2) Modifying Cardboard SDK Scripts to allow the desactivation at compilation
 
 We now need to add **Preprocessor Directives** to ignore **SDK functions** when the project compilation is set to **Virtual Reality Mode in Unity** :
 
@@ -37,7 +40,7 @@ We now need to add **Preprocessor Directives** to ignore **SDK functions** when 
 #endif
 ```
 
-This code is added in:
+This code is added in the followed places:
 * File: **Cardboard.cs**
    * Property accessor: ``SDK``
    
@@ -56,7 +59,7 @@ For more informations see commit: [Added precompilation directive in Cardboard S
 
 #### 3) Creating the build script
 
-Firsts lines contains your project name, bundle identifier, output folder etc...
+Firsts lines contains your project name, bundle identifier, output folder and the output filename for all the plateforms. Theses informations are going to be used during the compilation:
 
 ```C#
 private static string bundleIdentifier = "com.MyCompany.MyProductName";
@@ -66,7 +69,7 @@ private static string outputFilenameAndroidCardboard = outputFolder + BuildScrip
 private static string outputFilenameAndroidGearVR = outputFolder + BuildScript.productName + "GearVR.apk";
 ```
 	 
-The next three lines contains folders where we saved the **Cardboard SDK Plugins** (see step 1)
+The next three lines contains path to destination folder (android plugins) and folders where we saved the **Cardboard SDK Plugins** and **GearVR Signature Files** (see step 1). Before the compilation the default Android Plugins will be replaced by the appropriate one.
 
 ```C#
  private static string androidFolderDestination = Application.dataPath + "/Plugins/Android/";
@@ -75,7 +78,7 @@ The next three lines contains folders where we saved the **Cardboard SDK Plugins
 ```
 
 Uncomment next three line if you want to save your keystore userName and Password in this file (not recommended).
-If you don't you will have to enter your credential in the **Player Settings** panel
+If you don't you will have to enter your credential in the **Player Settings** panel the first time you compile your project.
 
 ```C#
 //private static string keystorePath;
@@ -83,37 +86,38 @@ If you don't you will have to enter your credential in the **Player Settings** p
 //private static string password;
 ```
 
-Next variable is used if you make multiple release the same day. The play store don't allow multiple release with same id. (The version number is generated from the date and the ``buildNumber``: YYYYMMDDB):
+Next variable is used if you make multiple release the same day. The play store don't allow multiple release with same id. (Note: the version number is generated from the date and this ``buildNumber`` with the following format: YYYYMMDDB):
 
 ```C#
 private static int buildNumber = 0;
 ```
 	 
-Next two function add a menu item on the **Unity** top menu bar:	 ![Build menu](/Images/BuildMenu.png?raw=true "Build menu")
+Next two function add a **Menu Item** on the **Unity** top menu bar:
+![Build menu](/Images/BuildMenu.png?raw=true "Build menu")
 	
 ```C#
  [MenuItem("Build/Cardboard")]
  public static void BuildCardboard()
  {
 	 Init ();
-	 SwapAndroidPluginFolder (androidFolderCardboard);
-	 PlayerSettings.virtualRealitySupported = false;
-	 PlayerSettings.SetScriptingDefineSymbolsForGroup (BuildTargetGroup.Android, "");
-	 Build(BuildTarget.Android, outputFilenameAndroidCardboard);
+	 SwapAndroidPluginFolder (androidFolderCardboard); // Change the Android Plugin
+	 PlayerSettings.virtualRealitySupported = false; // Disable the native Unity VR support
+	 PlayerSettings.SetScriptingDefineSymbolsForGroup (BuildTargetGroup.Android, ""); // Remove precompilation symbol
+	 Build(BuildTarget.Android, outputFilenameAndroidCardboard); // Build the project
  }
 
  [MenuItem("Build/GearVR")]
  public static void BuildGearVR()
  {
 	 Init ();
-	 SwapAndroidPluginFolder (androidFolderGearVR);
-	 PlayerSettings.virtualRealitySupported = true;
-	 PlayerSettings.SetScriptingDefineSymbolsForGroup (BuildTargetGroup.Android, "NATIVE_VR_SUPPORTED");	// Add a precompilation sympol to disable the cardboard SDK
-	 Build(BuildTarget.Android, outputFilenameAndroidGearVR);
+	 SwapAndroidPluginFolder (androidFolderGearVR); // Change the Android Plugin
+	 PlayerSettings.virtualRealitySupported = true; // Enable the native Unity VR support
+	 PlayerSettings.SetScriptingDefineSymbolsForGroup (BuildTargetGroup.Android, "NATIVE_VR_SUPPORTED"); // Add a precompilation symbol to disable the cardboard SDK
+	 Build(BuildTarget.Android, outputFilenameAndroidGearVR); // Build the project
  }
 ```
-	 
-Next function set some basic **Player Settings** (you can add yours here)
+
+Next function set some basic **Player Settings** (Add yours here)
 
 ```C#
  private static void Init()
@@ -151,7 +155,7 @@ static void SwapAndroidPluginFolder(string folderSource) {
 ```
 	
 	
-Finally the function build get all the scenes from the **Build Settings** window and add it to the **BuildPipeline**
+Finally the function build get all the scenes from the **Build Settings** window and add it to the **BuildPipeline** with the previous parameters.
 
 ```C#
 ![Build settings](/Images/BuildSettings.png?raw=true "Build settings")
@@ -187,9 +191,11 @@ Finally the function build get all the scenes from the **Build Settings** window
 }
 ```
 
-The script [BuildScript.cs](/Assets/BuildScript.cs) have a lot of comment in it and (i think) easy to understand.
+The script [BuildScript.cs](/Assets/BuildScript.cs) have a lot of comment in it and is (i think) easy to understand.
 
 That's all ! Enjoy you Virtual Reality builds on all Plateforms ! feel free to make pull request for new plateforms! :)
+
+Thanks !
 
 
 
