@@ -73,6 +73,10 @@ public class GazeInputModule : BaseInputModule {
 
   /// @cond HIDDEN
   public override bool ShouldActivateModule() {
+#if NATIVE_VR_SUPPORTED
+	return false;
+#endif
+
     if (!base.ShouldActivateModule()) {
       return false;
     }
@@ -80,6 +84,10 @@ public class GazeInputModule : BaseInputModule {
   }
 
   public override void DeactivateModule() {
+#if NATIVE_VR_SUPPORTED
+	return;
+#endif
+
     base.DeactivateModule();
     if (pointerData != null) {
       HandlePendingClick();
@@ -97,6 +105,12 @@ public class GazeInputModule : BaseInputModule {
   }
 
   public override void Process() {
+#if NATIVE_VR_SUPPORTED
+	enabled = false;
+	return;
+#endif
+	enabled = true;
+
     CastRayFromGaze();
     UpdateCurrentObject();
     PlaceCursor();
