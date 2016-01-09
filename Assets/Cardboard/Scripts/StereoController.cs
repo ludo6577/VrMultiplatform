@@ -284,7 +284,7 @@ public class StereoController : MonoBehaviour {
   private void CreateEye(Cardboard.Eye eye) {
     string nm = name + (eye == Cardboard.Eye.Left ? " Left" : " Right");
     GameObject go = new GameObject(nm);
-    go.transform.parent = transform;
+	go.transform.SetParent(transform, false);
     go.AddComponent<Camera>().enabled = false;
 #if !UNITY_5
     if (GetComponent("FlareLayer") != null) {

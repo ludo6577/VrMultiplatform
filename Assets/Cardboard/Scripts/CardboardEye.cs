@@ -256,9 +256,9 @@ public class CardboardEye : MonoBehaviour {
     // Member variable 'camera' not always initialized when this method called in Editor.
     // So, we'll just make a local of the same name.  Same for controller's camera.
     var camera = GetComponent<Camera>();
-    var monoCamera = controller.GetComponent<Camera>();
 #endif
 
+	var monoCamera = controller.GetComponent<Camera>();
     float ipd = CardboardProfile.Default.device.lenses.separation * controller.stereoMultiplier;
     Vector3 localPosition = Application.isPlaying ?
         transform.localPosition : (eye == Cardboard.Eye.Left ? -ipd/2 : ipd/2) * Vector3.right;;
