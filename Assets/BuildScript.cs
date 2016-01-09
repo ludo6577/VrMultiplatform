@@ -65,7 +65,8 @@ public class BuildScript : MonoBehaviour {
 	private static void Init()
 	{
 		var now = DateTime.Now;
-		var versionNumber = now.Year.ToString() + now.Month.ToString() + now.Day.ToString() + buildNumber.ToString(); //Version number: YYYYMMDDB
+		var versionNumber = now.Year.ToString("D4") + now.Month.ToString("D2") + now.Day.ToString("D2") + buildNumber.ToString("D2"); //Version number: YYYYMMDDB
+
 		PlayerSettings.companyName = companyName;
 		PlayerSettings.productName = productName;
 		PlayerSettings.bundleIdentifier = bundleIdentifier;
