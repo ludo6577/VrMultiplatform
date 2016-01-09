@@ -17,11 +17,12 @@ using System.Linq;
 public class BuildScript : MonoBehaviour {
 
 	// Generated file info
-	private static string bundleIdentifier = "com.MyCompany.MyProductName";
+	private static string companyName = "MyCompany";
 	private static string productName = "TestScene";
+	private static string bundleIdentifier = String.Format("com.{0}.{1}", companyName, productName);
 	private static string outputFolder = "bin/";
-	private static string outputFilenameAndroidCardboard = outputFolder + BuildScript.productName + "Cardboard.apk";
-	private static string outputFilenameAndroidGearVR = outputFolder + BuildScript.productName + "GearVR.apk";
+	private static string outputFilenameAndroidCardboard = outputFolder + productName + "Cardboard.apk";
+	private static string outputFilenameAndroidGearVR = outputFolder + productName + "GearVR.apk";
 
 	// Folders that contains the manifest, GearVR keys, ...
 	// Copy the content of imported files from the Cardboard and GearVR SDK in this news folders (manifest, phone keys, ...)
@@ -65,7 +66,7 @@ public class BuildScript : MonoBehaviour {
 	{
 		var now = DateTime.Now;
 		var versionNumber = now.Year.ToString() + now.Month.ToString() + now.Day.ToString() + buildNumber.ToString(); //Version number: YYYYMMDDB
-		
+		PlayerSettings.companyName = companyName;
 		PlayerSettings.productName = productName;
 		PlayerSettings.bundleIdentifier = bundleIdentifier;
 		PlayerSettings.bundleVersion = versionNumber;
