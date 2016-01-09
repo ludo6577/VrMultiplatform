@@ -27,7 +27,7 @@ public class BuildScript : MonoBehaviour {
 	// Folders that contains the manifest, GearVR keys, ...
 	// Copy the content of imported files from the Cardboard and GearVR SDK in this news folders (manifest, phone keys, ...)
 	private static string androidFolderDestination = Application.dataPath + "/Plugins/Android/";
-	private static string androidFolderCardboard = Application.dataPath + "/Platforms/AndroidCardboard/";
+	private static string androidFolderCardboard = Application.dataPath + "/Platforms/.AndroidCardboard/"; //Unity must ignore it (plugin conflits)
 	private static string androidFolderGearVR = Application.dataPath + "/Platforms/AndroidGearVR/";
 
 	// Keystore path, username and password (set it in Player Settings or here if you want to give in raw text)
