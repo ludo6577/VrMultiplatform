@@ -26,8 +26,8 @@ public class BuildScript : MonoBehaviour {
 	// Folders that contains the manifest, GearVR keys, ...
 	// Copy the content of imported files from the Cardboard and GearVR SDK in this news folders (manifest, phone keys, ...)
 	private static string androidFolderDestination = Application.dataPath + "/Plugins/Android/";
-	private static string androidFolderCardboard = Application.dataPath + "/Plugins/AndroidCardboard/";
-	private static string androidFolderGearVR = Application.dataPath + "/Plugins/AndroidGearVR/";
+	private static string androidFolderCardboard = Application.dataPath + "/Platforms/AndroidCardboard/";
+	private static string androidFolderGearVR = Application.dataPath + "/Platforms/AndroidGearVR/";
 
 	// Keystore path, username and password (set it in Player Settings or here if you want to give in raw text)
 	//private static string keystorePath;
@@ -80,7 +80,7 @@ public class BuildScript : MonoBehaviour {
 	static void SwapAndroidPluginFolder(string folderSource) {
 
 		if (Directory.Exists (androidFolderDestination)) 
-			Directory.Delete (androidFolderDestination);
+			Directory.Delete (androidFolderDestination, true);
 
 		if (Directory.Exists (folderSource)) {
 			FileUtil.CopyFileOrDirectory (folderSource, androidFolderDestination);		
@@ -113,7 +113,7 @@ public class BuildScript : MonoBehaviour {
 		Debug.Log("Scenes Names: " + scenesNames);
 
 		// Build the project
-		string results = BuildPipeline.BuildPlayer( levelList, output, target, BuildOptions.None );		
+		string results = BuildPipeline.BuildPlayer( levelList, output, target, BuildOptions.AutoRunPlayer );		
 		if ( results.Length == 0 )
 			Debug.Log("No Build Errors" );
 		else
