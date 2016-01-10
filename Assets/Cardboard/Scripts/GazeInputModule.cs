@@ -73,13 +73,14 @@ public class GazeInputModule : BaseInputModule {
 
   /// @cond HIDDEN
   public override bool ShouldActivateModule() {
-#if NATIVE_VR_SUPPORTED
-	return false;
-#endif
-
     if (!base.ShouldActivateModule()) {
       return false;
     }
+	
+#if NATIVE_VR_SUPPORTED
+	return !vrModeOnly;
+#endif
+
     return Cardboard.SDK.VRModeEnabled || !vrModeOnly;
   }
 
@@ -105,16 +106,13 @@ public class GazeInputModule : BaseInputModule {
   }
 
   public override void Process() {
-#if NATIVE_VR_SUPPORTED
-	enabled = false;
-	return;
-#endif
-	enabled = true;
-
     CastRayFromGaze();
     UpdateCurrentObject();
     PlaceCursor();
 
+#if NATIVE_VR_SUPPORTED
+	return;
+#endif
     if (!Cardboard.SDK.TapIsTrigger && !Input.GetMouseButtonDown(0) && Input.GetMouseButton(0)) {
       // Drag is only supported if TapIsTrigger is false.
       HandleDrag();
@@ -132,7 +130,11 @@ public class GazeInputModule : BaseInputModule {
   /// @endcond
 
   private void CastRayFromGaze() {
+#if NATIVE_VR_SUPPORTED
+		Vector2 headPose = NormalizedCartesianToSpherical(GameObject.FindWithTag("MainCamera").transform.rotation * Vector3.forward);
+#else
     Vector2 headPose = NormalizedCartesianToSpherical(Cardboard.SDK.HeadPose.Orientation * Vector3.forward);
+#endif
 
     if (pointerData == null) {
       pointerData = new PointerEventData(eventSystem);
