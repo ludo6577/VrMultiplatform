@@ -43,19 +43,14 @@ We now need to add **Preprocessor Directives** to ignore **SDK functions** when 
 ```
 
 This code is added in the followed places:
-* File: **Cardboard.cs**
+* File: **[Cardboard.cs](/Assets/Cardboard/Scripts/Cardboard.cs)**
    * Property accessor: ``SDK``
    
-* File: **StereoController.cs**
+* File: **[StereoController.cs](/Assets/Cardboard/Scripts/StereoController.cs)**
    * Function: ``Awake()``
    * Function: ``OnPreCull()``
-   
-* File: **StereoController.cs**
-   * Function: ``ShouldActivateModule()``
-   * Function: ``DeactivateModule()``
-   * Function: ``Process()``
 
-* File: **GazeInputModule.cs**
+* File: **[GazeInputModule.cs](/Assets/Cardboard/Scripts/GazeInputModule.cs)**
    * Function ``ShouldActivateModule()``
    * Function ``DeactivateModule()``
    * Function ``Process()``
