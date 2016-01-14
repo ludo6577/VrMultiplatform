@@ -21,11 +21,13 @@ After importing the **Cardboard SDK** you can see that it creates a folder in **
 ![Import Cardboard](/Images/ImportCardboard.png?raw=true "Import Cardboard")
 
 
-Copy and rename this folder in **Assets/Plateforms/AndroidCardboard** (or the directory of your choice):
-
-![Save Cardboard library](/Images/SaveCardboardLib.png?raw=true "Save Cardboard library")
+Copy and rename this folder in **Assets/Plateforms/.AndroidCardboard** . We add a dot before the folder name so Unity will ignore it. Unity generate a plugin conflict error when he try to compile this folder.
 
 Do the same steps for the GearVR: Get the [Oculus Signature File](https://developer.oculus.com/osig/) then place it into the folder **Assets/Plateforms/AndroidGearVR/assets/**.
+
+You should have something like this:
+
+![Save Cardboard library](/Images/SaveCardboardLib.png?raw=true "Save Cardboard library")
 
 The two folders we have just created will automatically replace the default **Android Plugins** during the compilation (in **Assets/Plugins/Android**).
 
@@ -52,10 +54,18 @@ This code is added in the followed places:
    * Function: ``ShouldActivateModule()``
    * Function: ``DeactivateModule()``
    * Function: ``Process()``
-   
+
+* File: **GazeInputModule.cs**
+   * Function ``ShouldActivateModule()``
+   * Function ``DeactivateModule()``
+   * Function ``Process()``
+   * Function ``CastRayFromGaze()``
+
 For more informations see commit: [Added precompilation directive in Cardboard SDK scripts](/../../commit/a162a61fc24867639bbfb2554cf0bcfd56585a1b)
 
+And [Fix GazeInput compatibility without Cardboard](https://github.com/ludo6577/VrMultiplatform/commit/444a81e45419137087dcafd158b6dbb341d2673a)
 
+This issue can be usefull too: [Fix cardboard issue (googlesamples/cardboard-unity#123)](https://github.com/ludo6577/VrMultiplatform/commit/14752a197a753864c5c0d23ca47c2b16d8f9c1c7)
 
 #### 3) Creating the build script
 
@@ -73,7 +83,7 @@ The next three lines contains path to destination folder (android plugins) and f
 
 ```C#
  private static string androidFolderDestination = Application.dataPath + "/Plugins/Android/";
- private static string androidFolderCardboard = Application.dataPath + "/Plateforms/AndroidCardboard/";
+ private static string androidFolderCardboard = Application.dataPath + "/Plateforms/.AndroidCardboard/";
  private static string androidFolderGearVR = Application.dataPath + "/Plateforms/AndroidGearVR/";
 ```
 
