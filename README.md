@@ -1,4 +1,4 @@
-# VrMultiplateform
+# VrMultiplatform
 
 This small project shows how to build an **Unity** project that support both the **Cardboard SDK** and **Unity Virtual Reality native support**.
 
@@ -21,9 +21,9 @@ After importing the **Cardboard SDK** you can see that it creates a folder in **
 ![Import Cardboard](/Images/ImportCardboard.png?raw=true "Import Cardboard")
 
 
-Copy and rename this folder in **Assets/Plateforms/.AndroidCardboard** . We add a dot before the folder name so Unity will ignore it. Unity generate a plugin conflict error when he try to compile this folder.
+Copy and rename this folder in **Assets/Platforms/.AndroidCardboard** . We add a dot before the folder name so Unity will ignore it. Unity generate a plugin conflict error when he try to compile this folder.
 
-Do the same steps for the GearVR: Get the [Oculus Signature File](https://developer.oculus.com/osig/) then place it into the folder **Assets/Plateforms/AndroidGearVR/assets/**.
+Do the same steps for the GearVR: Get the [Oculus Signature File](https://developer.oculus.com/osig/) then place it into the folder **Assets/Platforms/AndroidGearVR/assets/**.
 
 You should have something like this:
 
