@@ -198,7 +198,7 @@ Finally the function build get all the scenes from the **Build Settings** window
 
 The script [BuildScript.cs](/Assets/BuildScript.cs) has comments in it and is (i guess) easy to understand.
 
-Be carefull when you build for GearVR you will not be able to test your project in Unity. You will have to deactivate the Unity native mode and remove the Scripting define Symbols to get back to the Cardboard system.
+Be carefull when you build for **GearVR** you will not be able to test your project in Unity. You will have to deactivate the Unity native mode and remove the **Scripting define Symbols** to get back to the **Cardboard** system. Here is where this properties are:
 
 ![Build menu](/Images/PlayerSettingVR.png?raw=true "Build menu")
 
