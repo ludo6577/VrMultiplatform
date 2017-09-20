@@ -1,5 +1,7 @@
 # VrMultiplatform
 
+**EDIT:** With the new Unity Cardboard's integration this tutorial is not usefull anymore...
+
 This small project shows how to build an **Unity** project that support both the **Cardboard SDK** and **Unity Virtual Reality native support**.
 
 Only the **GearVR** is currently supported but all other headset that Unity support can be easily managed too (**HTC Vive**, **Oculus Rift**, ...)
